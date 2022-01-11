@@ -20,14 +20,23 @@ class SignupScreen extends StatefulWidget {
   _SignupScreenState createState() => _SignupScreenState();
 }
 
-final TextEditingController _userController = TextEditingController();
-final TextEditingController _emailController = TextEditingController();
-final TextEditingController _passController = TextEditingController();
-final TextEditingController _bioController = TextEditingController();
+late TextEditingController _userController;
+late TextEditingController _emailController;
+late TextEditingController _passController;
+late TextEditingController _bioController;
 Uint8List? _image;
 bool _isLoading = false;
 
 class _SignupScreenState extends State<SignupScreen> {
+  @override
+  void initState() {
+    super.initState();
+    _userController = TextEditingController();
+    _emailController = TextEditingController();
+    _passController = TextEditingController();
+    _bioController = TextEditingController();
+  }
+
   @override
   void dispose() {
     super.dispose();
@@ -38,7 +47,7 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   navigateToLogin() {
-    Navigator.push(
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (context) => const LoginScreen(),

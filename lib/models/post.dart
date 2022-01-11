@@ -5,10 +5,10 @@ class Post {
   final String uid;
   final String username;
   final String postID;
-  final datePublish;
+  final dynamic datePublish;
   final String postURL;
   final String profImage;
-  final likes;
+  final dynamic likes;
   Post({
     required this.caption,
     required this.uid,

@@ -18,9 +18,7 @@ class UserProvider with ChangeNotifier {
   Future<void> refreshUser() async {
     User user = await _authMethod.getUserDetails();
     _user = user;
-    if (kDebugMode) {
-      print("This Get Called");
-    }
+
     notifyListeners();
   }
 }

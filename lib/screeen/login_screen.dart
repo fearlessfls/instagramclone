@@ -6,6 +6,7 @@ import 'package:instergram_flutter/responsive/responsive_screen.dart';
 import 'package:instergram_flutter/responsive/web_screen_layout.dart';
 import 'package:instergram_flutter/screeen/signup_screen.dart';
 import 'package:instergram_flutter/utilities/color.dart';
+import 'package:instergram_flutter/utilities/utils.dart';
 import 'package:instergram_flutter/widgets/text_field_input.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -15,11 +16,19 @@ class LoginScreen extends StatefulWidget {
   _LoginScreenState createState() => _LoginScreenState();
 }
 
-final TextEditingController _emailController = TextEditingController();
-final TextEditingController _passController = TextEditingController();
+late TextEditingController _emailController;
+late TextEditingController _passController;
+
 bool _isLoading = false;
 
 class _LoginScreenState extends State<LoginScreen> {
+  @override
+  void initState() {
+    super.initState();
+    _emailController = TextEditingController();
+    _passController = TextEditingController();
+  }
+
   @override
   void dispose() {
     super.dispose();
@@ -36,7 +45,9 @@ class _LoginScreenState extends State<LoginScreen> {
     if (res != 'success') {
       setState(() {
         _isLoading = false;
+        showSnckBar(res, context);
       });
+    } else if (res == 'success') {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -50,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   navigateToSignUp() {
-    Navigator.push(
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (context) => const SignupScreen(),
